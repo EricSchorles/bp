@@ -7,27 +7,27 @@ import CategoryIcon from '../../assets/icons/light/Category';
 import { ButtonMenu, ButtonProps } from './ButtonMenu';
 
 type NavigationProviderProps = {
-    showHeader?: boolean
-    showAppBar?: boolean
+    setShowHeader?: React.Dispatch<React.SetStateAction<boolean>>
+    setShowAppBar?: React.Dispatch<React.SetStateAction<boolean>>
     children?: ReactNode
 }
 
 interface useNavigationProps {
-    showHeader?: boolean
-    showAppBar?: boolean
+    setShowHeader: React.Dispatch<React.SetStateAction<boolean>>
+    setShowAppBar: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const NavigationContext = React.createContext<useNavigationProps | undefined>(undefined);
-const defaultContext: useNavigationProps = { showAppBar: true, showHeader: true }
-export const useNavigation = () => useContext(NavigationContext) ?? defaultContext
+export const NavigationContext = React.createContext<useNavigationProps | undefined>(undefined);
+export const useNavigation = useContext(NavigationContext)
 
 export const NavigationProvider = (props: NavigationProviderProps) => {
     return <Navigation {...props} />
 };
 
-const Navigation = ({ children, showAppBar = true, showHeader = true }: NavigationProviderProps) => {
-
-    return (<NavigationContext.Provider value={{ showAppBar, showHeader }}>
+export const Navigation = ({ children }: NavigationProviderProps) => {
+    const [showAppBar, setShowAppBar] = useState(true);
+    const [showHeader, setShowHeader] = useState(true);
+    return (<NavigationContext.Provider value={{ setShowHeader, setShowAppBar }} >
         <div className='min-h-screen min-w-full flex'>
             {showAppBar &&
                 <AppBar />}
@@ -42,7 +42,7 @@ const Navigation = ({ children, showAppBar = true, showHeader = true }: Navigati
                 </div>
             </div>
         </div>
-    </NavigationContext.Provider>)
+    </NavigationContext.Provider >)
 
 }
 
@@ -60,7 +60,7 @@ const AppBar = ({ buttons }: AppBarProps) => {
         let buttonsSection: ButtonProps[] = [
             {
                 text: 'Dashboard',
-                Icon: <CategoryIcon/>,
+                Icon: <CategoryIcon />,
                 onClick: () => undefined
             },
         ]
