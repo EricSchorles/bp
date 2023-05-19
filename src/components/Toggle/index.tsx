@@ -1,16 +1,19 @@
 "use client"
-import { isThemeMode, setLocalStorageThemeMode  } from '@/utils/storage/theme'
-import React, { useEffect, useRef } from 'react'
 
-const Switchable = () => {
+import React, { useEffect, useRef } from 'react'
+import { useTheme } from '@contexts/Theme/useTheme'
+
+const Toggle = () => {
     const InputSwitchable = useRef<HTMLInputElement>(null)
+    const { theme, setTheme } = useTheme()
     useEffect(() => {
-        if (isThemeMode('dark')) {
+        if (theme === 'dark') {
             InputSwitchable.current!.checked = true
         }
-    }, []);
+    }, [theme]);
+
     return (
-        <><input
+        <input
             className="mr-2 mt-[0.3rem] h-3.5 w-8 appearance-none 
                 rounded-[0.4375rem]  before:pointer-events-none before:absolute before:h-3.5 
                 before:w-3.5 before:rounded-full before:bg-transparent before:content-[''] after:absolute after:z-[2] 
@@ -34,10 +37,10 @@ const Switchable = () => {
             type="checkbox"
             role="switch"
             ref={InputSwitchable}
-            onClick={() => isThemeMode('dark') ? setLocalStorageThemeMode ('light') : setLocalStorageThemeMode ('dark')}
-            id="flexSwitchCheckDefault" />
-        </>
+            onClick={() => theme === 'dark' ? setTheme('light') : setTheme('dark')}
+            id="flexSwitchCheckDefault"
+        />
     )
 }
 
-export default Switchable
+export default Toggle

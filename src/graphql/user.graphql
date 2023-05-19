@@ -1,0 +1,19 @@
+fragment CurrentUser on CurrentUser {
+  id
+  identifier
+  channels {
+    id
+    code
+    token
+    permissions
+    __typename
+  }
+  __typename
+}
+
+query GetCurrentUser {
+  me {
+    ...CurrentUser
+    __typename
+  }
+}

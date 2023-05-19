@@ -1,0 +1,14 @@
+query Search($input: SearchInput!) {
+  search(input: $input) {
+    totalItems
+    items {
+      productId
+      productName
+      slug
+      enabled
+      productAsset {
+        preview
+      }
+    }
+  }
+}

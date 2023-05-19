@@ -1,0 +1,64 @@
+query Facets($options: FacetListOptions) {
+  facets(options: $options) {
+    items {
+      id
+      name
+      code
+      isPrivate
+      values {
+        id
+        name
+        code
+      }
+    }
+  }
+}
+
+mutation DeleteFacet($id: ID!) {
+  deleteFacet(id: $id) {
+    result
+  }
+}
+
+mutation CreateFacet($input: CreateFacetInput!) {
+  createFacet(input: $input) {
+    id
+  }
+}
+
+query Facet($id: ID!) {
+  facet(id: $id) {
+    isPrivate
+    name
+    code
+    values {
+      id
+      name
+      code
+    }
+  }
+}
+
+mutation CreateFacetValues($input: [CreateFacetValueInput!]!) {
+  createFacetValues(input: $input) {
+    id
+  }
+}
+
+mutation UpdateFacet($input: UpdateFacetInput!) {
+  updateFacet(input: $input) {
+    id
+  }
+}
+
+mutation UpdateFacetValues($input: [UpdateFacetValueInput!]!) {
+  updateFacetValues(input: $input) {
+    id
+  }
+}
+
+mutation DeleteFacetValues($ids: [ID!]!) {
+  deleteFacetValues(ids: $ids) {
+    result
+  }
+}

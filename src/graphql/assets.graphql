@@ -1,0 +1,23 @@
+query AssetList($options: AssetListOptions) {
+  assets(options: $options) {
+    items {
+      id
+      name
+      preview
+    }
+  }
+}
+
+mutation CreateAssets($input: [CreateAssetInput!]!) {
+  createAssets(input: $input) {
+    ... on Asset {
+      id
+    }
+  }
+}
+
+mutation DeleteAssets($input: DeleteAssetsInput!) {
+  deleteAssets(input: $input) {
+    result
+  }
+}

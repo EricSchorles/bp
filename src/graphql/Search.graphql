@@ -1,0 +1,45 @@
+query SearchProducts($input: SearchInput!) {
+  search(input: $input) {
+    totalItems
+    items {
+      enabled
+      productId
+      productName
+      productAsset {
+        id
+        preview
+        focalPoint {
+          x
+          y
+        }
+      }
+      productVariantId
+      productVariantName
+      productVariantAsset {
+        id
+        preview
+        focalPoint {
+          x
+          y
+        }
+      }
+      sku
+      channelIds
+    }
+    facetValues {
+      count
+      facetValue {
+        id
+        createdAt
+        updatedAt
+        name
+        facet {
+          id
+          createdAt
+          updatedAt
+          name
+        }
+      }
+    }
+  }
+}

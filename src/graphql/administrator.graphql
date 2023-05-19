@@ -1,0 +1,42 @@
+fragment Role on Role {
+  id
+  createdAt
+  updatedAt
+  code
+  description
+  permissions
+  channels {
+    id
+    code
+    token
+    __typename
+  }
+  __typename
+}
+
+fragment Administrator on Administrator {
+  id
+  createdAt
+  updatedAt
+  firstName
+  lastName
+  emailAddress
+  user {
+    id
+    identifier
+    lastLogin
+    roles {
+      ...Role
+      __typename
+    }
+    __typename
+  }
+  __typename
+}
+
+query GetActiveAdministrator {
+  activeAdministrator {
+    ...Administrator
+    __typename
+  }
+}

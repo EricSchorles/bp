@@ -1,0 +1,95 @@
+query Products(
+  $options: ProductListOptions
+  $variantListOptions: ProductVariantListOptions
+) {
+  products(options: $options) {
+    items {
+      id
+      name
+      slug
+      enabled
+      featuredAsset {
+        preview
+      }
+      variantList(options: $variantListOptions) {
+        items {
+          price
+          currencyCode
+          id
+          name
+          featuredAsset {
+            preview
+          }
+        }
+      }
+    }
+  }
+}
+
+fragment DetailedProduct on Product {
+  id
+  name
+  description
+  enabled
+  slug
+  collections {
+    id
+    slug
+    name
+    breadcrumbs {
+      id
+      name
+      slug
+    }
+  }
+  facetValues {
+    id
+    code
+    name
+  }
+  featuredAsset {
+    id
+    preview
+  }
+  assets {
+    id
+    preview
+  }
+  variants {
+    id
+    name
+    priceWithTax
+    currencyCode
+    sku
+    stockLevel
+    featuredAsset {
+      id
+      preview
+    }
+  }
+}
+
+query Product($slug: String, $id: ID) {
+  product(slug: $slug, id: $id) {
+    ...DetailedProduct
+  }
+}
+
+mutation DeleteProduct($id: ID!) {
+  deleteProduct(id: $id) {
+    result
+  }
+}
+
+mutation CreateProduct($input: CreateProductInput!) {
+  createProduct(input: $input) {
+    id
+    name
+  }
+}
+
+mutation UpdateProduct($input: UpdateProductInput!) {
+  updateProduct(input: $input) {
+    id
+  }
+}

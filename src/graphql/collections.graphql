@@ -1,0 +1,27 @@
+query Collection($options: CollectionListOptions) {
+  collections(options: $options) {
+    items {
+      id
+      name
+      slug
+    }
+  }
+}
+
+mutation DeleteCollections($id: [ID!]!) {
+  deleteCollections(ids: $id) {
+    result
+  }
+}
+
+mutation CreateCollection($input: CreateCollectionInput!) {
+  createCollection(input: $input) {
+    id
+  }
+}
+
+mutation UpdateCollection($input: UpdateCollectionInput!) {
+  updateCollection(input: $input) {
+    id
+  }
+}

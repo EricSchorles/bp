@@ -1,0 +1,56 @@
+query ProductVariants($id: ID!) {
+  productVariants(productId: $id) {
+    totalItems
+    items {
+      enabled
+      id
+      productId
+      name
+      sku
+      price
+      stockAllocated
+      trackInventory
+      useGlobalOutOfStockThreshold
+      outOfStockThreshold
+      stockMovements {
+        totalItems
+        items {
+          __typename
+        }
+      }
+      taxCategory {
+        name
+        id
+      }
+      options {
+        languageCode
+        code
+        name
+      }
+      featuredAsset {
+        preview
+      }
+      assets {
+        preview
+      }
+    }
+  }
+}
+
+mutation CreateVariation($input: [CreateProductVariantInput!]!) {
+  createProductVariants(input: $input) {
+    id
+  }
+}
+
+mutation UpdateProductVariants($input: [UpdateProductVariantInput!]!) {
+  updateProductVariants(input: $input) {
+    id
+  }
+}
+
+mutation CreateProductVariants($input: [CreateProductVariantInput!]!) {
+  createProductVariants(input: $input) {
+    id
+  }
+}
